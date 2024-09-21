@@ -18,6 +18,9 @@
             scroll-behavior: smooth;
         }
 
+        #skill-slider {
+        transition: transform 0.5s ease-in-out;
+        }
         /* width */
         ::-webkit-scrollbar {
         width: 10px;
@@ -78,7 +81,7 @@
         }
 
         /* Ensures the navbar doesn’t blink */
-        body, html {
+        body {
             margin: 0;
             padding: 0;
         }
@@ -114,12 +117,40 @@
             margin-right: auto;
         }
 
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50; /* Keeps it on top of other elements */
+            background-color: #ffffff; /* Add a background color to avoid transparency issues */
+        }
+
+        section {
+            scroll-margin-top: 80px; /* Adjust this value based on your navbar height */
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            animation: marquee 10s linear infinite;
+        }
+
+        .carousel {
+            width: calc(100% + 4rem); /* Adjust based on spacing */
+        }
+        
     </style>
 </head>
 <body class="bg-white dark:bg-gray-900 transition-colors duration-500">
 
     <!-- Navigation Bar Starts -->
-    <nav class=" bg-white shadow-md fixed  w-full shadow-gray-200 border-gray-400 dark:bg-gray-900 transition-colors duration-500">
+    <nav class=" bg-white shadow-md sticky w-full shadow-gray-200 border-gray-400 dark:bg-gray-900 transition-colors duration-500">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="./Images/logo.png" class="h-12" alt="Logo" />
@@ -138,26 +169,25 @@
                     <li>
                         <a href="#about" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">About</a>
                     </li>
+                    
                     <li>
-                        <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">Skills</a>
+                        <a href="#projects" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">Projects</a>
                     </li>
+
                     <li>
-                        <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">Projects</a>
+                        <a href="#skills" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">Skills</a>
                     </li>
+
                     <li>
-                        <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">Contact</a>
+                        <a href="#contact" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">Contact</a>
                     </li>
                     <!-- Dark Mode Button Added to Nav -->
-                    <li class="flex items-center">
-                        <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400  focus:outline-none  rounded-lg text-sm  transition-all duration-300">
-                            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                            </svg>
-                            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                            </svg>
+                    <!-- <li class="flex items-center">
+                        <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 focus:outline-none rounded-lg text-sm transition-all duration-300">
+                            <i id="theme-toggle-light"  class="fa-solid fa-sun hidden"></i>
+                            <i id="theme-toggle-dark"  class="fa-solid fa-moon"></i>
                         </button>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -194,7 +224,7 @@
     <!-- Hero section Ends -->
 
     <!-- About Me Section -->
-    <section class="bg-gray-100 h-[95vh] dark:bg-gray-800 py-16" id="about">
+    <section class="bg-gray-100 min-h-min dark:bg-gray-800 py-16" id="about">
         <div class="max-w-screen-xl mx-auto px-4 flex flex-col lg:flex-row justify-center items-center lg:items-start">
             <!-- Photo on the Left -->
             <div class="lg:w-1/2 mb-8 lg:mb-0 flex justify-center lg:justify-start">
@@ -203,7 +233,7 @@
                 </div>
             </div>
             <!-- Text Content on the Right -->
-            <div class="lg:w-1/2 lg:pl-8">
+            <div class="lg:w-1/2 sm:h-[100vh] lg:pl-8">
                 <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">
                     About Me
                 </h2>
@@ -223,59 +253,186 @@
 
 
 
-<!-- Projects Section -->
-<section id="projects" class="bg-white dark:bg-gray-900 py-16">
-    <div class="max-w-screen-xl mx-auto px-4">
-        <!-- Section Title -->
-        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white text-center mb-12">
-            My Projects
-        </h2>
+    <!-- Projects Section -->
+    <section id="projects" class="bg-white dark:bg-gray-900 py-16 min-h-screen">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <!-- Section Title -->
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white text-center mb-12">
+                My Projects
+            </h2>
 
-        <!-- Projects Slider Container -->
-        <div class="relative overflow-hidden">
-            <!-- Slider Wrapper -->
-            <div id="slider" class="flex transition-transform duration-700 ease-out">
-                <!-- Project 1 -->
-                <div class="w-full flex-shrink-0">
-                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
-                        <img src="./Projects Images/Monosonic Music Website.png" alt="Project 1" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Project 1</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">This is a project description. It’s a brief summary of the work, technologies used, and key features.</p>
-                        <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
+            <!-- Projects Slider Container -->
+            <div class="relative flex-col items-center overflow-hidden">
+                <!-- Slider Wrapper -->
+                <div id="slider" class="flex transition-transform duration-700 ease-out">
+                    <!-- Project 1 -->
+                    <div class="w-full flex-shrink-0">
+                        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
+                            <img src="./Projects Images/Monosonic Music Website.png" alt="Project 1" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Monosonic Music Website</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">MonoSonic is a dynamic music streaming app that updates song details and background images with smooth transitions and controls.
+                            </p>
+                            <a href="https://nishant29-n.github.io/MonoSonic-Music-Website/" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="w-full flex-shrink-0">
+                        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
+                            <img src="./Projects Images/Weather App.png" alt="Project 2" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Weather App</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">This dynamic Weather App provides real-time weather updates based on user location, featuring a sleek design, interactive animations, and customizable backgrounds for a captivating user experience.</p>
+                            <a href="https://nishant29-n.github.io/Weather-App/" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="w-full flex-shrink-0">
+                        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
+                            <img src="./Projects Images/EMI Calculator.png" alt="Project 3" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">EMI Calculator</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">An interactive EMI Calculator that helps users easily compute Equated Monthly Installments for loans. Input your loan amount, interest rate, and tenure to get instant results!</p>
+                            <a href="https://nishant29-n.github.io/EMI-Calculator/" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="w-full flex-shrink-0">
+                        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
+                            <img src="./Projects Images/NFT.png" alt="Project 3" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">NFT Landing Page</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Created a modern, responsive website for an NFT marketplace, tailored to meet diverse user needs.</p>
+                            <a href="./Projects/Project 4_ NFT Landing page/dist/index.html" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="w-full flex-shrink-0">
+                        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
+                            <img src="./Projects Images/Bike.png" alt="Project 3" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Bike Landing Page</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Created a modern landing page for a futuristic bike company , tailored to meet diverse user needs.</p>
+                            <a href="./Projects/Project 3_ Bike landing page/dist/index.html" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="w-full flex-shrink-0">
-                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
-                        <img src="./Projects Images/NFT.png" alt="Project 2" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Project 2</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">This is a project description. It’s a brief summary of the work, technologies used, and key features.</p>
-                        <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="w-full flex-shrink-0">
-                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg mx-2">
-                        <img src="./Projects Images/Bike.png" alt="Project 3" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Project 3</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">This is a project description. It’s a brief summary of the work, technologies used, and key features.</p>
-                        <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">View Project</a>
-                    </div>
-                </div>
+                <!-- Slider Controls -->
+                <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
+                    <i class="fa-solid fa-square-caret-left text-2xl"></i>
+                </button>
+                <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
+                    <i class="fa-solid fa-square-caret-right text-2xl"></i>
+                </button>
             </div>
-
-            <!-- Slider Controls -->
-            <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
-                <i class="fa-solid fa-square-caret-left"></i>
-            </button>
-            <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
-                <i class="fa-solid fa-square-caret-right"></i>
-            </button>
         </div>
-    </div>
-</section>
+        <div class="flex items-center justify-center">
+            <a href="https://github.com/Nishant29-N" target="_blank">
+                <button class="text-center text-xl text-white border-[1px] font-semibold p-3 rounded-xl hover:bg-cyan-600">View More</button>
+            </a>
+        </div>
+
+    </section>
+
+
+
+    <!-- skills -->
+    <section class="bg-gray-100 dark:bg-gray-800 py-16" id="skills">
+        <!-- <div class="skillslider">
+            <div class="slide-track">
+                <div class="slide">
+                    <img src="Skills Images/HTML 3D.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/CSS 3D.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/JavaScript 3D.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/Tailwind 3d.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/Responsive Design 3D.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/MySQL 3D.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/Canva.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/Photoshop 3D.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="Skills Images/Illustrator 3d.png" height="100" width="250" alt="" />
+                </div>
+                
+            </div>
+        </div> -->
+        <h1 class="text-center text-white text-3xl font-bold">My Skills</h1>
+        <div class="relative overflow-hidden my-7">
+            <div class="carousel flex space-x-4 animate-marquee">
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/HTML 3D.png" alt="Image 1" class="w-full h-auto"></div>
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/CSS 3D.png" alt="Image 2" class="w-full h-auto"></div>
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/JavaScript 3D.png" alt="Image 3" class="w-full h-auto"></div>
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/Tailwind 3d.png" alt="Image 4" class="w-full h-auto"></div>
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/MySQL 3D.png" alt="Image 5" class="w-full h-auto"></div>
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/Canva.png" alt="Image 5" class="w-full h-auto"></div>
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/Photoshop 3D.png" alt="Image 5" class="w-full h-auto"></div>
+                <div class="carousel-item sm:w-45 w-48 flex-none"><img src="Skills Images/Illustrator 3d.png" alt="Image 5" class="w-full h-auto"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Information Starts -->
+
+    <footer class="footer-container flex md:flex-row flex-col flex-wrap justify-start md:justify-normal items-center bg-slate-100 dark:bg-slate-900" id="contact">
+        <div class="left-footer flex flex-wrap dark:text-white w-[80%] md:w-[50%]   md:ml-9">
+            <div class="text-left flex flex-col flex-wrap"> 
+                <h1 class="text-3xl font-bold my-4">Contact Me</h1>
+                <p><i class="fa-solid mr-0 md:mr-5 fa-paper-plane py-5"></i>nishantn204@gmail.com</p>
+                <p><i class="fa-solid mr-0 md:mr-5 fa-phone py-5"></i>+91 88821 24299</p>
+                <div class="flex social-icons">
+                    
+                    <a href="https://www.linkedin.com/in/nishant-brathi/" target="_blank">
+                            <i class="fa-brands fa-linkedin cursor-pointer text-4xl mr-8 dark:text-white text-black hover:scale-110 duration-300 hover:text-cyan-400 my-4"></i>
+                    </a>
+                    
+                    <a href="https://github.com/Nishant29-N" target="_blank">
+                            <i class="fa-brands fa-github cursor-pointer text-4xl mr-8 dark:text-white text-black hover:scale-110 duration-300 hover:text-cyan-400 my-4"></i>
+                    </a>
+                    
+                </div>
+                <button class="dark:animate-pulse font-semibold bg-cyan-950 border-black dark:bg-cyan-500 rounded-md py-2 dark:border-white border hover:bg-slate-950 my-4  w-[240px] text-white hover:font-bold hover:text-white duration-200 justify-center flex items-center hover:animate-none">
+    
+                    <i class="fa-solid fa-arrow-right text-xl mx-2 animate-pulse duration-700 dark:animate-none"></i>
+                    <a class="text-[16px]" href="../assets/Nishant's Updated Resume (2).pdf" target="_blank" download="">Download Resume</a>
+    
+                </button>
+            </div>
+            
+        </div>
+        <div class="right-footer mx-5 flex flex-wrap">
+            <form name="submit-to-google-sheet" class="flex flex-col">
+                <label class="my-1 dark:text-white   font-semibold md:w-[500px] w-[300px] rounded-md py-1 " for="Name">Name:</label>
+                <input class="my-1 md:w-[500px] w-[300px] rounded-md py-[8px] text-left dark:bg-white" type="text" name="Name"  required>
+                <label class="my-1 dark:text-white   font-semibold md:w-[500px] rounded-md py-1 " for="Email">Email:</label>
+                <input class="my-1 md:w-[500px] w-[300px] rounded-md  py-[8px] text-left dark:bg-white" type="email" name="Email"  required>
+                <label class="my-1  dark:text-white   font-semibold md:w-[500px] w-[300px] rounded-md py-1 " for="Message">Message:</label>
+                <textarea class="my-1 md:w-[500px] w-[300px] rounded-md py-1 text-left dark:bg-white" name="Message" rows="6"></textarea>
+                <button class=" w-[200px] rounded-md hover:bg-slate-950 text-white duration-300 py-1 dark:text-white font-semibold bg-cyan-600 border border-white my-4" type="submit" class="btn btn2">Submit</button>
+                <div>
+                    <span class="text-green-700 font-medium mt-3" id="msg"></span>
+                </div>
+            </form>
+        </div>
+
+    </footer>
+    <p class="dark:text-white text-center font-medium my-3">Copyright 2024 Nishant. All Rights Reserved.</p>
+
+    <!-- Contact Information Ends -->
 
 
 
@@ -288,5 +445,7 @@
 
     <script src="portfolio.js"></script>
     <script src="https://kit.fontawesome.com/bc94aa2890.js" crossorigin="anonymous"></script>
+
+  
 </body>
 </html>
